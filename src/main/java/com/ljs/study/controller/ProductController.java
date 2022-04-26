@@ -1,12 +1,14 @@
 package com.ljs.study.controller;
 
 
-import com.ljs.study.component.PriceComponent;
+import com.ljs.study.component.BithumPriceComponent;
+import com.ljs.study.component.UpbitPriceComponent;
 import com.ljs.study.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -17,7 +19,10 @@ public class ProductController {
     public ProductService productService;
 
     @Autowired
-    public PriceComponent priceComponent;
+    public BithumPriceComponent bithumPriceComponent;
+
+    @Autowired
+    public UpbitPriceComponent upbitPriceComponent;
 
     @GetMapping("all")
     public List<String> getProduct() {
@@ -30,9 +35,15 @@ public class ProductController {
         return "OK";
     }
 
+    /**
+     * 요구사항이 바뀌어서 빗썸과 업비트의 평균가를 내려줘야 한다.
+     */
     @GetMapping("btcPrice")
     public BigDecimal getPrice() {
-        return priceComponent.getPrice("BTC");
+        BigDecimal bithumPrice = bithumPriceComponent.getPrice("BTC");
+        BigDecimal upbitPrice = upbitPriceComponent.getPrice("BTC");
+        BigDecimal avgPrice = bithumPrice.add(upbitPrice).divide(BigDecimal.valueOf(2));
+        return avgPrice;
     }
 
 }

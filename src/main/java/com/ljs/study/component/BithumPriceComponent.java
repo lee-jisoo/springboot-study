@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 // 빗썸 코인 시세를 조회 API 입니다.
 @Component
-public class PriceComponent {
+public class BithumPriceComponent {
 
     public String GET_PRICE_API = "http://bithum.com/getMarketCurrency";
 
