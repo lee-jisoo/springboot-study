@@ -1,14 +1,12 @@
 package com.ljs.study.controller;
 
 
-import com.ljs.study.component.BithumPriceComponent;
-import com.ljs.study.component.UpbitPriceComponent;
+import com.ljs.study.component.PriceComponent;
 import com.ljs.study.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -19,10 +17,10 @@ public class ProductController {
     public ProductService productService;
 
     @Autowired
-    public BithumPriceComponent bithumPriceComponent;
+    public PriceComponent bithumPriceComponent;
 
     @Autowired
-    public UpbitPriceComponent upbitPriceComponent;
+    public PriceComponent upbitPriceComponent;
 
     @GetMapping("all")
     public List<String> getProduct() {
