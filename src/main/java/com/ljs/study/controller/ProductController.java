@@ -2,17 +2,17 @@ package com.ljs.study.controller;
 
 
 import com.ljs.study.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("product")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    public ProductService productService;
+    public final ProductService productService;
 
     @GetMapping("all")
     public List<String> getProduct() {
