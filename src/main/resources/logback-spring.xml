@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty name="profile" source="spring.profiles.active" defaultValue="local" />
+    <springProperty name="LOG_DIR" source="log.path" defaultValue="log/" />
+    <include resource="logback/logback-common.xml" />
+    <include resource="logback/logback-${profile}.xml" />
+</configuration>

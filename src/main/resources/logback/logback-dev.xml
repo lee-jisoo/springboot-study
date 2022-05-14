@@ -1,0 +1,15 @@
+<included>
+  <logger name="org.springframework" level="INFO" />
+  <logger name="com.ljs.study" level="DEBUG" />
+  <!--
+  <logger name="com.ljs.study.support.filter.CommandLoggingFilter" level="DEBUG">
+    // additivity="false"> // additivity 가 없는 경우 root appender 에도 로그가 쓰여짐
+    <appender-ref ref="request-async" />
+  </logger>
+  -->
+
+  <root level="DEBUG">
+    <appender-ref ref="logic-async" />
+  </root>
+
+</included>
