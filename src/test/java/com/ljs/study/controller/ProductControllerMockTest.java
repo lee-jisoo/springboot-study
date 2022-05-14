@@ -1,38 +1,45 @@
 package com.ljs.study.controller;
 
+import com.ljs.study.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-public class ProductControllerTest {
+// Controller 만 MockTest
+@WebMvcTest(ProductController.class)
+public class ProductControllerMockTest {
 
     @Autowired
     private MockMvc mvc;
 
-    @Order(2)
+    @MockBean
+    private ProductService productService;
+
     @DisplayName("[GET] /product/all")
     @Test
     public void getProduct() throws Exception {
-        // then
+        final List<String> list = List.of("갤럭시");
+
+        when(productService.getProduct()).thenReturn(list);
+
         mvc.perform(get(("/product/all")))
                 .andExpect(status().isOk())
-                .andExpect(content().json("[\"아이패드\"]"))
+                .andExpect(content().json("[\"갤럭시\"]"))
                 .andDo(print());
     }
 
-    @Order(1)
     @DisplayName("[POST] /product/insert")
     @Test
     public void insertProduct() throws Exception {
