@@ -1,0 +1,12 @@
+<included>
+  <logger name="org.springframework" level="INFO" />
+  <logger name="com.ljs.study" level="DEBUG" />
+  <!--
+  <logger name="com.ljs.study.support.filter.CommandLoggingFilter" level ="DEBUG" />
+  -->
+
+  <root level="DEBUG">
+    <appender-ref ref="console" />
+  </root>
+
+</included>

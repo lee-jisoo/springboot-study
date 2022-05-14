@@ -1,0 +1,55 @@
+<included>
+
+  <!-- Console Appender -->
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%X{uuid}]%-5level: %logger{36}:%line - %m%n</pattern>
+      <outputPatternAsHeader>true</outputPatternAsHeader>
+    </encoder>
+  </appender>
+
+  <!-- Logic Log Appender -->
+  <appender name="logic" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/logic.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/logic-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>500MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%X{uuid}]%-5level: %logger{36} - %m%n</pattern>
+      <outputPatternAsHeader>true</outputPatternAsHeader>
+    </encoder>
+  </appender>
+
+  <appender name="logic-async" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="logic" />
+  </appender>
+
+  <!-- Request Log Appender -->
+  <appender name="request" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_DIR}/request.log</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_DIR}/request-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>500MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%X{uuid}]%-5level: %logger{36} - %m%n</pattern>
+      <outputPatternAsHeader>true</outputPatternAsHeader>
+    </encoder>
+  </appender>
+
+  <appender name="request-async" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="request" />
+  </appender>
+
+</included>

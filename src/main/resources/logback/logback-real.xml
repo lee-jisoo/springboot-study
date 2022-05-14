@@ -1,0 +1,17 @@
+<included>
+  <logger name="org.springframework" level="ERROR" />
+  <logger name="com.ljs.study" level="INFO" />
+  <!--
+  <logger name="com.ljs.study.support.filter.CommandLoggingFilter" level ="INFO">
+    // additivity="false"> // additivity 가 없는 경우 root appender 에도 로그가 쓰여짐
+    <appender-ref ref="request-async" />
+  </logger>
+  -->
+
+  <root level="INFO">
+    <appender-ref ref="request" />
+    <appender-ref ref="console" />
+    <appender-ref ref="logic-async" />
+  </root>
+
+</included>
